@@ -133,7 +133,7 @@
 
 ### 第一步：获取项目
 ```bash
-git clone https://github.com/[你的用户名]/gemini-cli-chinese.git
+git clone https://github.com/396001000/gemini-cli-chinese.git
 cd gemini-cli-chinese
 ```
 
