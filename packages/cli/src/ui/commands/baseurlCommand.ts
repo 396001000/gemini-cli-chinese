@@ -23,7 +23,7 @@ export const baseurlCommand: SlashCommand = {
         type: 'message' as const,
         messageType: 'info' as const,
         content:
-          '用法:\n  /baseurl https://api.aigsv.com/v1\n  /baseurl clear  （恢复默认）',
+          '用法:\n  /baseurl https://your-api-endpoint.com/v1\n  /baseurl clear  （恢复默认）',
       };
     }
 

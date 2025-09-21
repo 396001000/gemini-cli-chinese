@@ -273,7 +273,7 @@ node packages/cli/dist/index.js
 /setkey 你的API密钥
 
 # 设置 API 端点（如果使用中转服务）
-/baseurl https://api.aigsv.com/v1
+/baseurl https://your-api-endpoint.com/v1
 
 # 开始使用！
 你好，请帮我写一个 Python 脚本
