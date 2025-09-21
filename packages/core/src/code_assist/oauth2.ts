@@ -42,7 +42,7 @@ const OAUTH_CLIENT_ID =
 // which you embed in the source code of your application. (In this context,
 // the client secret is obviously not treated as a secret.)"
 // Set via environment variables to avoid GitHub security scanning alerts.
-const OAUTH_CLIENT_SECRET = process.env['OAUTH_CLIENT_SECRET'] || 'GOCSPX-[REDACTED-FOR-SECURITY-SCAN]';
+const OAUTH_CLIENT_SECRET = process.env['OAUTH_CLIENT_SECRET'] || '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';
 
 // OAuth Scopes for Cloud Code authorization.
 const OAUTH_SCOPE = [
