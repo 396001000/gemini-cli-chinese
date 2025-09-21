@@ -1,5 +1,24 @@
 {
-  "name": "@google/gemini-cli",
+  "name": "gemini-cli-chinese",
+  "description": "Gemini CLI 中文汉化版 - Google Gemini 官方命令行工具的完整中文汉化增强版本。支持AI对话、代码生成、文本处理等功能，专为中文用户优化。",
+  "keywords": [
+    "gemini",
+    "cli",
+    "chinese",
+    "中文",
+    "汉化",
+    "google",
+    "ai",
+    "artificial intelligence",
+    "command line",
+    "命令行",
+    "代码生成",
+    "code generation",
+    "chatbot",
+    "聊天机器人",
+    "开发工具",
+    "developer tools"
+  ],
   "version": "0.7.0-nightly.20250918.2722473a",
   "engines": {
     "node": ">=20.0.0"
@@ -11,7 +30,7 @@
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/[你的用户名]/gemini-cli-chinese.git"
   },
   "config": {
     "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.7.0-nightly.20250918.2722473a"

@@ -200,7 +200,7 @@ export const Composer = () => {
           placeholder={
             vimEnabled
               ? "  Press 'i' for INSERT mode and 'Esc' for NORMAL mode."
-              : '  Type your message or @path/to/file'
+              : '  输入您的消息或 @path/to/file'
           }
         />
       )}

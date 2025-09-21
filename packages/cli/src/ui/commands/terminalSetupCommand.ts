@@ -7,6 +7,7 @@
 import type { MessageActionReturn, SlashCommand } from './types.js';
 import { CommandKind } from './types.js';
 import { terminalSetup } from '../utils/terminalSetup.js';
+import { t } from '../../i18n/index.js';
 
 /**
  * Command to configure terminal keybindings for multiline input support.
@@ -26,8 +27,7 @@ export const terminalSetupCommand: SlashCommand = {
 
       let content = result.message;
       if (result.requiresRestart) {
-        content +=
-          '\n\nPlease restart your terminal for the changes to take effect.';
+        content += t('terminalSetup.restartRequired');
       }
 
       return {
@@ -38,7 +38,7 @@ export const terminalSetupCommand: SlashCommand = {
     } catch (error) {
       return {
         type: 'message',
-        content: `Failed to configure terminal: ${error}`,
+        content: t('terminalSetup.failedToConfigure', { error: String(error) }),
         messageType: 'error',
       };
     }

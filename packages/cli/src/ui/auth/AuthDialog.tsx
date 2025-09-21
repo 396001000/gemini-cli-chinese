@@ -20,6 +20,7 @@ import { useKeypress } from '../hooks/useKeypress.js';
 import { AuthState } from '../types.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
 import { validateAuthMethodWithSettings } from './useAuth.js';
+import { t } from '../../i18n/index.js';
 
 interface AuthDialogProps {
   config: Config;
@@ -38,22 +39,22 @@ export function AuthDialog({
 }: AuthDialogProps): React.JSX.Element {
   let items = [
     {
-      label: 'Login with Google',
+      label: t('auth.loginWithGoogle'),
       value: AuthType.LOGIN_WITH_GOOGLE,
     },
     ...(process.env['CLOUD_SHELL'] === 'true'
       ? [
           {
-            label: 'Use Cloud Shell user credentials',
+            label: t('auth.useCloudShell'),
             value: AuthType.CLOUD_SHELL,
           },
         ]
       : []),
     {
-      label: 'Use Gemini API Key',
+      label: t('auth.useGeminiApiKey'),
       value: AuthType.USE_GEMINI,
     },
-    { label: 'Vertex AI', value: AuthType.USE_VERTEX_AI },
+    { label: t('auth.vertexAi'), value: AuthType.USE_VERTEX_AI },
   ];
 
   if (settings.merged.security?.auth?.enforcedType) {
@@ -155,11 +156,11 @@ Logging in with Google... Please restart Gemini CLI to continue.
       width="100%"
     >
       <Text bold color={theme.text.primary}>
-        Get started
+        {t('auth.getStarted')}
       </Text>
       <Box marginTop={1}>
         <Text color={theme.text.primary}>
-          How would you like to authenticate for this project?
+          {t('auth.howToAuthenticate')}
         </Text>
       </Box>
       <Box marginTop={1}>
@@ -175,11 +176,11 @@ Logging in with Google... Please restart Gemini CLI to continue.
         </Box>
       )}
       <Box marginTop={1}>
-        <Text color={theme.text.secondary}>(Use Enter to select)</Text>
+        <Text color={theme.text.secondary}>{t('auth.useEnterToSelect')}</Text>
       </Box>
       <Box marginTop={1}>
         <Text color={theme.text.primary}>
-          Terms of Services and Privacy Notice for Gemini CLI
+          {t('auth.termsAndPrivacy')}
         </Text>
       </Box>
       <Box marginTop={1}>

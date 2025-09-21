@@ -39,7 +39,7 @@ const _PrepareLabel: React.FC<PrepareLabelProps> = ({
         ? label.slice(0, MAX_WIDTH) + '...'
         : label;
     return (
-      <Text wrap="wrap" color={textColor}>
+      <Text color={textColor}>
         {display}
       </Text>
     );
@@ -95,7 +95,7 @@ const _PrepareLabel: React.FC<PrepareLabelProps> = ({
   }
 
   return (
-    <Text color={textColor} wrap="wrap">
+    <Text color={textColor}>
       {before}
       {match
         ? match.split(/(\s+)/).map((part, index) => (

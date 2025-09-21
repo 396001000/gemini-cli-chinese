@@ -8,9 +8,22 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { type SlashCommand, CommandKind } from '../commands/types.js';
+import { t } from '../../i18n/index.js';
 
 interface Help {
   commands: readonly SlashCommand[];
+}
+
+// 翻译描述的辅助函数
+function translateDescription(description: string): string {
+  // 首先尝试从 officialCommands 翻译映射中查找
+  const officialTranslation = t(`officialCommands.${description}`, {}, true);
+  if (officialTranslation !== `officialCommands.${description}`) {
+    return officialTranslation;
+  }
+  
+  // 如果没有找到，返回原描述
+  return description;
 }
 
 export const Help: React.FC<Help> = ({ commands }) => (
@@ -23,46 +36,26 @@ export const Help: React.FC<Help> = ({ commands }) => (
   >
     {/* Basics */}
     <Text bold color={theme.text.primary}>
-      Basics:
+      {t('ui.Basics:', {}, true) || 'Basics:'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Add context
+        {t('ui.Add context', {}, true) || 'Add context'}
       </Text>
-      : Use{' '}
-      <Text bold color={theme.text.accent}>
-        @
-      </Text>{' '}
-      to specify files for context (e.g.,{' '}
-      <Text bold color={theme.text.accent}>
-        @src/myFile.ts
-      </Text>
-      ) to target specific files or folders.
+      : {t('ui.addContextDescription', {}, true) || 'Use @ to specify files for context (e.g., @src/myFile.ts) to target specific files or folders.'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
-        Shell mode
+        {t('ui.Shell mode', {}, true) || 'Shell mode'}
       </Text>
-      : Execute shell commands via{' '}
-      <Text bold color={theme.text.accent}>
-        !
-      </Text>{' '}
-      (e.g.,{' '}
-      <Text bold color={theme.text.accent}>
-        !npm run start
-      </Text>
-      ) or use natural language (e.g.{' '}
-      <Text bold color={theme.text.accent}>
-        start server
-      </Text>
-      ).
+      : {t('ui.shellModeDescription', {}, true) || 'Execute shell commands via ! (e.g., !npm run start) or use natural language (e.g. start server).'}
     </Text>
 
     <Box height={1} />
 
     {/* Commands */}
     <Text bold color={theme.text.primary}>
-      Commands:
+      {t('ui.Commands:', {}, true) || 'Commands:'}
     </Text>
     {commands
       .filter((command) => command.description && !command.hidden)
@@ -76,7 +69,7 @@ export const Help: React.FC<Help> = ({ commands }) => (
             {command.kind === CommandKind.MCP_PROMPT && (
               <Text color={theme.text.secondary}> [MCP]</Text>
             )}
-            {command.description && ' - ' + command.description}
+            {command.description && ' - ' + translateDescription(command.description)}
           </Text>
           {command.subCommands &&
             command.subCommands
@@ -87,7 +80,7 @@ export const Help: React.FC<Help> = ({ commands }) => (
                     {'   '}
                     {subCommand.name}
                   </Text>
-                  {subCommand.description && ' - ' + subCommand.description}
+                  {subCommand.description && ' - ' + translateDescription(subCommand.description)}
                 </Text>
               ))}
         </Box>
@@ -97,87 +90,83 @@ export const Help: React.FC<Help> = ({ commands }) => (
         {' '}
         !{' '}
       </Text>
-      - shell command
+      - {t('officialCommands.shell command', {}, true) || 'shell command'}
     </Text>
     <Text color={theme.text.primary}>
-      <Text color={theme.text.secondary}>[MCP]</Text> - Model Context Protocol
-      command (from external servers)
+      <Text color={theme.text.secondary}>[MCP]</Text> - {t('officialCommands.Model Context Protocol command (from external servers)', {}, true) || 'Model Context Protocol command (from external servers)'}
     </Text>
 
     <Box height={1} />
 
     {/* Shortcuts */}
     <Text bold color={theme.text.primary}>
-      Keyboard Shortcuts:
+      {t('ui.Keyboard Shortcuts:', {}, true) || 'Keyboard Shortcuts:'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Alt+Left/Right
       </Text>{' '}
-      - Jump through words in the input
+      - {t('ui.Jump through words in the input', {}, true) || 'Jump through words in the input'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+C
       </Text>{' '}
-      - Quit application
+      - {t('ui.Quit application', {}, true) || 'Quit application'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         {process.platform === 'win32' ? 'Ctrl+Enter' : 'Ctrl+J'}
       </Text>{' '}
       {process.platform === 'linux'
-        ? '- New line (Alt+Enter works for certain linux distros)'
-        : '- New line'}
+        ? `- ${t('ui.New line', {}, true) || 'New line'} (Alt+Enter works for certain linux distros)`
+        : `- ${t('ui.New line', {}, true) || 'New line'}`}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+L
       </Text>{' '}
-      - Clear the screen
+      - {t('ui.Clear the screen', {}, true) || 'Clear the screen'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         {process.platform === 'darwin' ? 'Ctrl+X / Meta+Enter' : 'Ctrl+X'}
       </Text>{' '}
-      - Open input in external editor
+      - {t('ui.Open input in external editor', {}, true) || 'Open input in external editor'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Ctrl+Y
       </Text>{' '}
-      - Toggle YOLO mode
+      - {t('ui.Toggle YOLO mode', {}, true) || 'Toggle YOLO mode'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Enter
       </Text>{' '}
-      - Send message
+      - {t('ui.Send message', {}, true) || 'Send message'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Esc
       </Text>{' '}
-      - Cancel operation / Clear input (double press)
+      - {t('ui.Cancel operation / Clear input (double press)', {}, true) || 'Cancel operation / Clear input (double press)'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Shift+Tab
       </Text>{' '}
-      - Toggle auto-accepting edits
+      - {t('ui.Toggle auto-accepting edits', {}, true) || 'Toggle auto-accepting edits'}
     </Text>
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         Up/Down
       </Text>{' '}
-      - Cycle through your prompt history
+      - {t('ui.Cycle through your prompt history', {}, true) || 'Cycle through your prompt history'}
     </Text>
     <Box height={1} />
     <Text color={theme.text.primary}>
-      For a full list of shortcuts, see{' '}
-      <Text bold color={theme.text.accent}>
-        docs/keyboard-shortcuts.md
-      </Text>
+      有关快捷键的完整列表，请参阅 docs/keyboard-shortcuts.md
     </Text>
   </Box>
 );

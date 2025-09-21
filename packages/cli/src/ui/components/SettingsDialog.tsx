@@ -31,6 +31,7 @@ import {
 } from '../../utils/settingsUtils.js';
 import { useVimMode } from '../contexts/VimModeContext.js';
 import { useKeypress } from '../hooks/useKeypress.js';
+import { t } from '../../i18n/index.js';
 import chalk from 'chalk';
 import { cpSlice, cpLen, stripUnsafeCharacters } from '../utils/textUtils.js';
 import {
@@ -46,6 +47,48 @@ interface SettingsDialogProps {
 }
 
 const maxItemsToShow = 8;
+
+// 翻译设置标签的辅助函数
+function translateSettingLabel(label: string): string {
+  const labelMap: Record<string, string> = {
+    'Vim Mode': t('settings.vimMode'),
+    'Disable Auto Update': t('settings.disableAutoUpdate'),
+    'Enable Prompt Completion': t('settings.enablePromptCompletion'),
+    'Debug Keystroke Logging': t('settings.debugKeystrokeLogging'),
+    'Output Format': t('settings.outputFormat'),
+    'Hide Window Title': t('settings.hideWindowTitle'),
+    'Hide Tips': t('settings.hideTips'),
+    'Hide Banner': t('settings.hideBanner'),
+    'Hide Context Summary': t('settings.hideContextSummary'),
+    'Hide CWD': t('settings.hideCWD'),
+    'Hide Sandbox Status': t('settings.hideSandboxStatus'),
+    'Hide Model Info': t('settings.hideModelInfo'),
+    'Hide Footer': t('settings.hideFooter'),
+    'Show Memory Usage': t('settings.showMemoryUsage'),
+    'Show Line Numbers': t('settings.showLineNumbers'),
+    'Show Citations': t('settings.showCitations'),
+    'Disable Loading Phrases': t('settings.disableLoadingPhrases'),
+    'Screen Reader Mode': t('settings.screenReaderMode'),
+    'IDE Mode': t('settings.ideMode'),
+    'Max Session Turns': t('settings.maxSessionTurns'),
+    'Skip Next Speaker Check': t('settings.skipNextSpeakerCheck'),
+    'Memory Discovery Max Dirs': t('settings.memoryDiscoveryMaxDirs'),
+    'Load Memory From Include Directories': t('settings.loadMemoryFromIncludeDirectories'),
+    'Respect .gitignore': t('settings.respectGitignore'),
+    'Respect .geminiignore': t('settings.respectGeminiignore'),
+    'Enable Recursive File Search': t('settings.enableRecursiveFileSearch'),
+    'Disable Fuzzy Search': t('settings.disableFuzzySearch'),
+    'Use node-pty for Shell Execution': t('settings.useNodePtyForShellExecution'),
+    'Show Color': t('settings.showColor'),
+    'Auto Accept': t('settings.autoAccept'),
+    'Use Ripgrep': t('settings.useRipgrep'),
+    'Enable Tool Output Truncation': t('settings.enableToolOutputTruncation'),
+    'Tool Output Truncation Threshold': t('settings.toolOutputTruncationThreshold'),
+    'Tool Output Truncation Lines': t('settings.toolOutputTruncationLines'),
+    'Folder Trust': t('settings.folderTrust'),
+  };
+  return labelMap[label] || label;
+}
 
 export function SettingsDialog({
   settings,
@@ -124,7 +167,7 @@ export function SettingsDialog({
       const definition = getSettingDefinition(key);
 
       return {
-        label: definition?.label || key,
+        label: translateSettingLabel(definition?.label || key),
         value: key,
         type: definition?.type,
         toggle: () => {
@@ -749,7 +792,7 @@ export function SettingsDialog({
     >
       <Box flexDirection="column" flexGrow={1}>
         <Text bold={focusSection === 'settings'} wrap="truncate">
-          {focusSection === 'settings' ? '> ' : '  '}Settings
+          {focusSection === 'settings' ? '> ' : '  '}{t('settings.title')}
         </Text>
         <Box height={1} />
         {showScrollUp && <Text color={theme.text.secondary}>▲</Text>}
@@ -876,7 +919,7 @@ export function SettingsDialog({
         {showScopeSelection && (
           <Box marginTop={1} flexDirection="column">
             <Text bold={focusSection === 'scope'} wrap="truncate">
-              {focusSection === 'scope' ? '> ' : '  '}Apply To
+              {focusSection === 'scope' ? '> ' : '  '}{t('settings.applyTo')}
             </Text>
             <RadioButtonSelect
               items={scopeItems}
@@ -891,8 +934,7 @@ export function SettingsDialog({
 
         <Box height={1} />
         <Text color={theme.text.secondary}>
-          (Use Enter to select
-          {showScopeSelection ? ', Tab to change focus' : ''})
+          {t('settings.useEnterToSelect')}
         </Text>
         {showRestartPrompt && (
           <Text color={theme.status.warning}>

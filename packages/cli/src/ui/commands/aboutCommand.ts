@@ -8,7 +8,8 @@ import { getCliVersion } from '../../utils/version.js';
 import type { CommandContext, SlashCommand } from './types.js';
 import { CommandKind } from './types.js';
 import process from 'node:process';
-import { MessageType, type HistoryItemAbout } from '../types.js';
+import { MessageType } from '../types.js';
+import type { HistoryItemAbout } from '../types.js';
 import { IdeClient } from '@google/gemini-cli-core';
 
 export const aboutCommand: SlashCommand = {

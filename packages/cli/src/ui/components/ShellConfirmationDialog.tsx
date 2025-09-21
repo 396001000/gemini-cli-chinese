@@ -12,6 +12,7 @@ import { RenderInline } from '../utils/InlineMarkdownRenderer.js';
 import type { RadioSelectItem } from './shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { useKeypress } from '../hooks/useKeypress.js';
+import { t } from '../../i18n/index.js';
 
 export interface ShellConfirmationRequest {
   commands: string[];
@@ -51,15 +52,15 @@ export const ShellConfirmationDialog: React.FC<
 
   const options: Array<RadioSelectItem<ToolConfirmationOutcome>> = [
     {
-      label: 'Yes, allow once',
+      label: t('confirmation.yesAllowOnce'),
       value: ToolConfirmationOutcome.ProceedOnce,
     },
     {
-      label: 'Yes, allow always for this session',
+      label: t('confirmation.yesAllowAlwaysSession'),
       value: ToolConfirmationOutcome.ProceedAlways,
     },
     {
-      label: 'No (esc)',
+      label: t('confirmation.noEsc'),
       value: ToolConfirmationOutcome.Cancel,
     },
   ];
@@ -75,10 +76,10 @@ export const ShellConfirmationDialog: React.FC<
     >
       <Box flexDirection="column" marginBottom={1}>
         <Text bold color={theme.text.primary}>
-          Shell Command Execution
+          {t('shellConfirmation.title')}
         </Text>
         <Text color={theme.text.primary}>
-          A custom command wants to run the following shell commands:
+          {t('shellConfirmation.description')}
         </Text>
         <Box
           flexDirection="column"
@@ -96,7 +97,7 @@ export const ShellConfirmationDialog: React.FC<
       </Box>
 
       <Box marginBottom={1}>
-        <Text color={theme.text.primary}>Do you want to proceed?</Text>
+        <Text color={theme.text.primary}>{t('shellConfirmation.question')}</Text>
       </Box>
 
       <RadioButtonSelect items={options} onSelect={handleSelect} isFocused />

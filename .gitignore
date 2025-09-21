@@ -1,51 +1,74 @@
-# API keys and secrets
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.tgz
+
+# Environment variables
 .env
-.env~
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# gemini-cli settings
-# We want to keep the .gemini in the root of the repo and ignore any .gemini
-# in subdirectories. In our root .gemini we want to allow for version control
-# for subcommands.
-**/.gemini/
-!/.gemini/
-.gemini/*
-!.gemini/config.yaml
-!.gemini/commands/
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Note: .gemini-clipboard/ is NOT in gitignore so Gemini can access pasted images
-
-# Dependency directory
-node_modules
-bower_components
-
-# Editors
-.idea
-*.iml
-
-# OS metadata
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# TypeScript build info files
-*.tsbuildinfo
+# Logs
+logs
+*.log
 
-# Ignore built ts files
-dist
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# Docker folder to help skip auth refreshes
-.docker
+# Coverage directory used by tools like istanbul
+coverage/
 
-bundle
+# Temporary files
+tmp/
+temp/
 
-# Test report files
-junit.xml
-packages/*/coverage/
+# Optional npm cache directory
+.npm
 
-# Generated files
-packages/cli/src/generated/
-packages/core/src/generated/
-.integration-tests/
-packages/vscode-ide-companion/*.vsix
+# Optional REPL history
+.node_repl_history
 
-# GHA credentials
-gha-creds-*.json
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Bundle analyzer report
+bundle-report.html
+
+# Launcher build artifacts (if any remain)
+launcher/dist/
+launcher/dist-*/
+launcher/BUILD_*/
+launcher/PACK_*/
+
+# Test artifacts
+test-results/

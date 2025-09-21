@@ -17,20 +17,20 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
   const geminiMdFileCount = config.getGeminiMdFileCount();
   return (
     <Box flexDirection="column">
-      <Text color={theme.text.primary}>Tips for getting started:</Text>
+      <Text color={theme.text.primary}>使用入门提示：</Text>
       <Text color={theme.text.primary}>
-        1. Ask questions, edit files, or run commands.
+        1. 提问、编辑文件或运行命令。
       </Text>
       <Text color={theme.text.primary}>
-        2. Be specific for the best results.
+        2. 描述具体以获得最佳效果。
       </Text>
       {geminiMdFileCount === 0 && (
         <Text color={theme.text.primary}>
-          3. Create{' '}
+          3. 创建{' '}
           <Text bold color={theme.text.accent}>
             GEMINI.md
           </Text>{' '}
-          files to customize your interactions with Gemini.
+          文件来自定义与 Gemini 的交互。
         </Text>
       )}
       <Text color={theme.text.primary}>
@@ -38,7 +38,10 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text bold color={theme.text.accent}>
           /help
         </Text>{' '}
-        for more information.
+        获取更多信息。
+      </Text>
+      <Text color={theme.text.primary}>
+        {geminiMdFileCount === 0 ? '5.' : '4.'} 欢迎使用超级智体汉化魔改版 Gemini-cli
       </Text>
     </Box>
   );

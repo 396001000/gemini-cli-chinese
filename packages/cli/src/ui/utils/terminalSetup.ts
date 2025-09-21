@@ -30,6 +30,7 @@ import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import { isKittyProtocolEnabled } from './kittyProtocolDetector.js';
 import { VSCODE_SHIFT_ENTER_SEQUENCE } from './platformConstants.js';
+import { t } from '../../i18n/index.js';
 
 const execAsync = promisify(exec);
 
@@ -311,8 +312,7 @@ export async function terminalSetup(): Promise<TerminalSetupResult> {
   if (isKittyProtocolEnabled()) {
     return {
       success: true,
-      message:
-        'Your terminal is already configured for an optimal experience with multiline input (Shift+Enter and Ctrl+Enter).',
+      message: t('terminalSetup.alreadyConfigured'),
     };
   }
 
@@ -321,8 +321,7 @@ export async function terminalSetup(): Promise<TerminalSetupResult> {
   if (!terminal) {
     return {
       success: false,
-      message:
-        'Could not detect terminal type. Supported terminals: VS Code, Cursor, and Windsurf.',
+      message: t('terminalSetup.couldNotDetect'),
     };
   }
 
@@ -336,7 +335,7 @@ export async function terminalSetup(): Promise<TerminalSetupResult> {
     default:
       return {
         success: false,
-        message: `Terminal "${terminal}" is not supported yet.`,
+        message: t('terminalSetup.notSupported', { terminal }),
       };
   }
 }

@@ -23,6 +23,7 @@ import { useUIState } from '../contexts/UIStateContext.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useConfig } from '../contexts/ConfigContext.js';
 import { useSettings } from '../contexts/SettingsContext.js';
+import { t } from '../../i18n/index.js';
 import process from 'node:process';
 
 // Props for DialogManager
@@ -98,8 +99,8 @@ export const DialogManager = () => {
         <Box paddingY={1}>
           <RadioButtonSelect
             items={[
-              { label: 'Yes', value: true },
-              { label: 'No', value: false },
+              { label: t('confirmation.yes'), value: true },
+              { label: t('confirmation.no'), value: false },
             ]}
             onSelect={(value: boolean) => {
               uiState.confirmationRequest!.onConfirm(value);

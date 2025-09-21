@@ -35,6 +35,18 @@ import { vimCommand } from '../ui/commands/vimCommand.js';
 import { setupGithubCommand } from '../ui/commands/setupGithubCommand.js';
 import { terminalSetupCommand } from '../ui/commands/terminalSetupCommand.js';
 
+// 超级智体专用版自定义命令
+import { statusCommand } from '../ui/commands/statusCommand.js';
+import { modelCommand } from '../ui/commands/modelCommand.js';
+import { yoloCommand } from '../ui/commands/yoloCommand.js';
+import { sandboxCommand } from '../ui/commands/sandboxCommand.js';
+import { debugCommand } from '../ui/commands/debugCommand.js';
+import { setkeyCommand } from '../ui/commands/setkeyCommand.js';
+import { globalPromptCommand } from '../ui/commands/globalPromptCommand.js';
+import { projectPromptCommand } from '../ui/commands/projectPromptCommand.js';
+import { apiCommand } from '../ui/commands/apiCommand.js';
+import { baseurlCommand } from '../ui/commands/baseurlCommand.js';
+
 /**
  * Loads the core, hard-coded slash commands that are an integral part
  * of the Gemini CLI application.
@@ -78,6 +90,18 @@ export class BuiltinCommandLoader implements ICommandLoader {
       vimCommand,
       setupGithubCommand,
       terminalSetupCommand,
+      
+      // 超级智体专用版自定义命令
+      statusCommand,
+      modelCommand,
+      yoloCommand,
+      sandboxCommand,
+      debugCommand,
+      setkeyCommand,
+      globalPromptCommand,
+      projectPromptCommand,
+      apiCommand,
+      baseurlCommand,
     ];
 
     return allDefinitions.filter((cmd): cmd is SlashCommand => cmd !== null);

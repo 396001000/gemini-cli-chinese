@@ -8,7 +8,9 @@ import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { PrepareLabel, MAX_WIDTH } from './PrepareLabel.js';
 import { CommandKind } from '../commands/types.js';
+import { t } from '../../i18n/index.js';
 import { Colors } from '../colors.js';
+import stringWidth from 'string-width';
 export interface Suggestion {
   label: string;
   value: string;
@@ -29,6 +31,18 @@ interface SuggestionsDisplayProps {
 
 export const MAX_SUGGESTIONS_TO_SHOW = 8;
 export { MAX_WIDTH };
+
+// 翻译描述的辅助函数
+function translateDescription(description: string): string {
+  // 首先尝试从 officialCommands 翻译映射中查找
+  const officialTranslation = t(`officialCommands.${description}`, {}, true);
+  if (officialTranslation !== `officialCommands.${description}`) {
+    return officialTranslation;
+  }
+  
+  // 如果没有找到，返回原描述
+  return description;
+}
 
 export function SuggestionsDisplay({
   suggestions,
@@ -64,7 +78,7 @@ export function SuggestionsDisplay({
     s.label + (s.commandKind === CommandKind.MCP_PROMPT ? ' [MCP]' : '');
 
   const maxLabelLength = Math.max(
-    ...suggestions.map((s) => getFullLabel(s).length),
+    ...suggestions.map((s) => stringWidth(getFullLabel(s))),
   );
   const commandColumnWidth =
     mode === 'slash' ? Math.min(maxLabelLength, Math.floor(width * 0.5)) : 0;
@@ -106,8 +120,8 @@ export function SuggestionsDisplay({
 
             {suggestion.description && (
               <Box flexGrow={1} paddingLeft={3}>
-                <Text color={textColor} wrap="truncate">
-                  {suggestion.description}
+                <Text color={textColor}>
+                  {translateDescription(suggestion.description)}
                 </Text>
               </Box>
             )}

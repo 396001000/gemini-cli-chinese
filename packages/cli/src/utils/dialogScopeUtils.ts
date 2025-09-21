@@ -7,14 +7,15 @@
 import type { LoadedSettings } from '../config/settings.js';
 import { SettingScope } from '../config/settings.js';
 import { settingExistsInScope } from './settingsUtils.js';
+import { t } from '../i18n/index.js';
 
 /**
  * Shared scope labels for dialog components that need to display setting scopes
  */
 export const SCOPE_LABELS = {
-  [SettingScope.User]: 'User Settings',
-  [SettingScope.Workspace]: 'Workspace Settings',
-  [SettingScope.System]: 'System Settings',
+  [SettingScope.User]: t('settings.userSettings'),
+  [SettingScope.Workspace]: t('settings.workspaceSettings'),
+  [SettingScope.System]: t('settings.systemSettings'),
 } as const;
 
 /**
