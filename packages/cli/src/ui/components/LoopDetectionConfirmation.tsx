@@ -5,6 +5,7 @@
  */
 
 import { Box, Text } from 'ink';
+import React from 'react';
 import type { RadioSelectItem } from './shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { useKeypress } from '../hooks/useKeypress.js';
@@ -22,6 +23,17 @@ interface LoopDetectionConfirmationProps {
 export function LoopDetectionConfirmation({
   onComplete,
 }: LoopDetectionConfirmationProps) {
+  // 检查YOLO模式，如果启用则自动禁用循环检测
+  const isYoloMode = process.env['GEMINI_YOLO'] === 'true';
+  
+  // 如果是YOLO模式，自动选择禁用循环检测
+  React.useEffect(() => {
+    if (isYoloMode) {
+      onComplete({
+        userSelection: 'disable',
+      });
+    }
+  }, [isYoloMode, onComplete]);
   useKeypress(
     (key) => {
       if (key.name === 'escape') {
@@ -47,6 +59,27 @@ export function LoopDetectionConfirmation({
       },
     },
   ];
+
+  // 如果是YOLO模式，显示自动处理提示
+  if (isYoloMode) {
+    return (
+      <Box
+        flexDirection="column"
+        borderStyle="round"
+        borderColor={theme.status.success}
+        width="100%"
+        marginLeft={1}
+      >
+        <Box paddingX={1} paddingY={0} flexDirection="column">
+          <Box minHeight={1}>
+            <Text color={theme.status.success} bold>
+              🚀 YOLO模式 - 自动禁用循环检测
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box

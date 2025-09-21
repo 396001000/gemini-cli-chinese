@@ -139,11 +139,20 @@ export async function createContentGenerator(
     }
     const httpOptions = { headers };
 
-    const googleGenAI = new GoogleGenAI({
+    // 检查是否设置了自定义API基础URL
+    const baseUrl = process.env['GEMINI_API_BASE_URL'];
+    const googleGenAIConfig: any = {
       apiKey: config.apiKey === '' ? undefined : config.apiKey,
       vertexai: config.vertexai,
       httpOptions,
-    });
+    };
+    
+    // 如果设置了自定义baseUrl，添加到配置中
+    if (baseUrl && !config.vertexai) {
+      googleGenAIConfig.baseUrl = baseUrl;
+    }
+    
+    const googleGenAI = new GoogleGenAI(googleGenAIConfig);
     return new LoggingContentGenerator(googleGenAI.models, gcConfig);
   }
   throw new Error(
