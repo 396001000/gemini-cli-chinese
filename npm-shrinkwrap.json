@@ -1,11 +1,11 @@
 {
-  "name": "@google/gemini-cli",
+  "name": "gemini-cli-chinese",
   "version": "0.7.0-nightly.20250918.2722473a",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@google/gemini-cli",
+      "name": "gemini-cli-chinese",
       "version": "0.7.0-nightly.20250918.2722473a",
       "workspaces": [
         "packages/*"
@@ -48,7 +48,7 @@
         "yargs": "^17.7.2"
       },
       "engines": {
-        "node": ">=20.0.0"
+        "node": ">=18.7.0"
       },
       "optionalDependencies": {
         "@lydell/node-pty": "1.1.0",
