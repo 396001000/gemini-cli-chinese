@@ -22,8 +22,20 @@ if errorlevel 1 (
 )
 
 :: 检查版本兼容性
-for /f "tokens=1 delims=v." %%a in ("%NODE_VERSION%") do set MAJOR_VERSION=%%a
-for /f "tokens=2 delims=v." %%b in ("%NODE_VERSION%") do set MINOR_VERSION=%%b
+if defined NODE_VERSION (
+    :: 移除v前缀并解析版本号
+    for /f "tokens=1,2 delims=v." %%a in ("%NODE_VERSION%") do (
+        if "%%a"=="v" (
+            set MAJOR_VERSION=%%b
+        ) else (
+            set MAJOR_VERSION=%%a
+        )
+    )
+    for /f "tokens=2 delims=." %%b in ("%NODE_VERSION%") do set MINOR_VERSION=%%b
+) else (
+    set MAJOR_VERSION=0
+    set MINOR_VERSION=0
+)
 
 echo.
 echo 📋 版本兼容性检查：

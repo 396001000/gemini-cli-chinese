@@ -74,25 +74,41 @@ echo 📦 配置 npm 设置...
 npm config set fund false
 npm config set audit false
 
-:: 尝试使用 npm ci 安装
+:: 智能选择安装方式
 echo.
 echo 📦 安装根目录依赖...
-npm ci
-if errorlevel 1 (
-    echo ⚠️  npm ci 失败，尝试 npm install...
-    npm install
+
+:: 检查是否存在 package-lock.json
+if exist "package-lock.json" (
+    echo 📋 检测到 package-lock.json，使用 npm ci...
+    npm ci
     if errorlevel 1 (
-        echo ❌ 依赖安装失败
-        echo.
-        echo 🔧 故障排除建议：
-        echo 1. 检查网络连接
-        echo 2. 尝试切换 npm 源：npm config set registry https://registry.npmmirror.com/
-        echo 3. 清理 npm 缓存：npm cache clean --force
-        echo 4. 升级 npm：npm install -g npm@latest
-        pause
-        exit /b 1
+        echo ⚠️  npm ci 失败，尝试 npm install...
+        npm install
+        if errorlevel 1 goto :install_failed
     )
+) else (
+    echo 📋 未找到 package-lock.json，使用 npm install...
+    npm install
+    if errorlevel 1 goto :install_failed
 )
+
+echo ✅ 依赖安装成功
+goto :build_packages
+
+:install_failed
+echo ❌ 依赖安装失败
+echo.
+echo 🔧 故障排除建议：
+echo 1. 检查网络连接
+echo 2. 尝试切换 npm 源：npm config set registry https://registry.npmmirror.com/
+echo 3. 清理 npm 缓存：npm cache clean --force
+echo 4. 升级 npm：npm install -g npm@latest
+echo 5. 检查磁盘空间是否充足
+pause
+exit /b 1
+
+:build_packages
 
 echo.
 echo 🔨 构建项目包...
