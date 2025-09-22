@@ -169,11 +169,15 @@ echo   2. 选择此目录作为 Gemini-CLI 目录：
 echo      %CD%
 echo.
 echo 方式二：直接启动 CLI
-echo   1. 运行：启动CLI.bat
-echo   2. 或者命令行：node packages/cli/dist/index.js
+echo   🌐 全局环境：启动CLI.bat
+echo   📦 虚拟环境：安装虚拟环境.bat（如遇兼容性问题）
 echo.
 echo 配置说明：
 echo   - 使用 /setkey 设置 API 密钥
 echo   - 使用 /baseurl 设置 API 端点（可选）
+echo.
+echo 💡 环境选择：
+echo   - 全局环境：使用系统Node.js，启动快速
+echo   - 虚拟环境：使用项目依赖，兼容性更好
 echo.
 pause
