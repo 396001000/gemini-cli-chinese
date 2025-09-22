@@ -21,7 +21,7 @@
   ],
   "version": "0.7.0-nightly.20250918.2722473a",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=18.7.0"
   },
   "type": "module",
   "workspaces": [

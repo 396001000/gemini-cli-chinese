@@ -70,5 +70,14 @@ launcher/dist-*/
 launcher/BUILD_*/
 launcher/PACK_*/
 
+# 启动器文件夹（不同步到GitHub）
+gemini-cli启动器/
+
+# 安装脚本（已移除，让用户自行安装依赖）
+安装*.bat
+检查*.bat
+测试*.bat
+debug*.bat
+
 # Test artifacts
 test-results/
